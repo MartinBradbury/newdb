@@ -21,7 +21,6 @@ CLOUDINARY_STORAGE = {
 }
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^p9ggn3r*97%(@otgu&!4oh9v$#wc5!wq=*!1fgwb^f3%ox&r5'
+SECRET_KEY = 'django-insecure-*^w+5nchd&=quv57tjg4l7q%ctxa1^11cl0(3fi@kfkm6%#7k9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
