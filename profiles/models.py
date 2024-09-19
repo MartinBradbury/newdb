@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from cloudinary.models import CloudinaryField
 
 class Profile (models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -8,8 +9,7 @@ class Profile (models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
-    image = models.ImageField(
-        upload_to='images/', default='../default_profile_qtk8ec')
+    image = CloudinaryField('image', default='https://res.cloudinary.com/dpjdwg51y/image/upload/v1726782033/k2wgf56y8stabvctolmu.png')
     
     class Meta:
         ordering = ['-created_at']
