@@ -6,6 +6,7 @@ from posts.models import Post
 Like model, related to 'owner' and 'post'.
 'owner' is a User instance and 'post' is a Post instance.
 'unique_together' makes sure a user can't like the same post twice.
+ADD THIS REF
 """
 
 class Like(models.Model):
