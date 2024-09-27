@@ -5,6 +5,9 @@ from followers.models import Follow
 class ProfieSerializer(serializers.ModelSerializer):
     owner= serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    post_count = serializers.ReadOnlyField()
+    followed_count = serializers.ReadOnlyField()
+    follows_count = serializers.ReadOnlyField()
     """
     Allow users to follow profiles and identify with an ID
     """
@@ -29,5 +32,6 @@ class ProfieSerializer(serializers.ModelSerializer):
         fields = [
                     'owner', 'created_at', 'updated_at',
                     'name', 'content', 'image', 'is_owner',
-                    'following_id',
+                    'following_id', 'post_count', 'followed_count',
+                    'follows_count',
             ]
