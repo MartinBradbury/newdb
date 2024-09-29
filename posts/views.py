@@ -16,12 +16,18 @@ class PostList(generics.ListAPIView):
 
     filter_backends = [
         filters.OrderingFilter,
+        filters.SearchFilter,
     ]
 
     ordering_fields = [
         'like_count',
         'created_at',
         'comment_count',
+    ]
+
+    search_fields = [
+        'title',
+        'owner__username',
     ]
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
