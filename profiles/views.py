@@ -17,6 +17,7 @@ class ProfileList(generics.ListAPIView):
 
     filter_backends = [
         filters.OrderingFilter,
+        filters.SearchFilter,
     ]
 
     ordering_fields = [
@@ -25,6 +26,10 @@ class ProfileList(generics.ListAPIView):
         'follower_count',
         'owner__followed__created_at',
         'owner__follows__created_at',
+    ]
+
+    search_fields = [
+        'owner__username',
     ]
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
