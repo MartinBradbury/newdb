@@ -3,6 +3,7 @@ from .serializers import CommentSerializer
 from rest_framework import generics, permissions, filters
 from new_database.permissions import IsOwnerOrReadOnly
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class CommentList(generics.ListCreateAPIView):
@@ -15,6 +16,7 @@ class CommentList(generics.ListCreateAPIView):
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
+        DjangoFilterBackend,
     ]   
 
     ordering_fields = [
@@ -26,6 +28,10 @@ class CommentList(generics.ListCreateAPIView):
         'owner__username',
         'content',
 
+    ]
+
+    filterset_fields = [
+        'owner__profile',
     ]
 
     def perform_create(self, serializer):

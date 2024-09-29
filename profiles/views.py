@@ -5,6 +5,7 @@ from .serializers import ProfieSerializer
 from rest_framework import generics, filters
 from new_database.permissions import IsOwnerOrReadOnly
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ProfileList(generics.ListAPIView):
     serializer_class = ProfieSerializer
@@ -18,6 +19,7 @@ class ProfileList(generics.ListAPIView):
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
+        DjangoFilterBackend,
     ]
 
     ordering_fields = [
@@ -30,6 +32,10 @@ class ProfileList(generics.ListAPIView):
 
     search_fields = [
         'owner__username',
+    ]
+
+    filterset_fields = [
+        'owner__profile',
     ]
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
