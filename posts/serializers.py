@@ -6,6 +6,7 @@ class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
     image = serializers.FileField(max_length=None)
+    like_count = serializers.ReadOnlyField()
 
     """
     Allow users to like and unlike with an ID
@@ -37,5 +38,5 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'owner', 'created_at', 'updated_at',
             'title', 'content', 'image', 'is_owner',
-            'like_id',
+            'like_id', 'like_count',
         ]
