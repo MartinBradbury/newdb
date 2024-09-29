@@ -5,6 +5,7 @@ from .serializers import PostSerializer
 from rest_framework import generics, filters
 from django.db.models import Count
 from new_database.permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
 
 class PostList(generics.ListAPIView):
     serializer_class = PostSerializer
@@ -17,6 +18,7 @@ class PostList(generics.ListAPIView):
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
+        DjangoFilterBackend,
     ]
 
     ordering_fields = [
@@ -28,6 +30,10 @@ class PostList(generics.ListAPIView):
     search_fields = [
         'title',
         'owner__username',
+    ]
+
+    filterset_fields = [
+        'owner__profile',
     ]
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
