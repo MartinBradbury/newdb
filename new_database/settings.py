@@ -59,9 +59,9 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['new_database.herokuapp.com', 'newdb-8cf17c337cd5.herokuapp.com']
+ALLOWED_HOSTS = ['new_database.herokuapp.com', 'newdb-8cf17c337cd5.herokuapp.com', 'http://localhost:8000', '127.0.0.1']
 
 # Application definition
 
@@ -170,9 +170,11 @@ USE_TZ = True
 
 CORS_ALLOW_CREDENTIALS = True
 
-ALLOWED_ORIGINS = [
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://new-database.herokuapp.com',
+    
 ]
 
 
