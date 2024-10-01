@@ -61,7 +61,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['new_database.herokuapp.com', 'newdb-8cf17c337cd5.herokuapp.com', 'http://localhost:8000', '127.0.0.1']
+ALLOWED_HOSTS = ['newdb-8cf17c337cd5.herokuapp.com', 'http://localhost:8000', '127.0.0.1']
 
 # Application definition
 
@@ -174,6 +174,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://martinreact-a6aa313fd743.herokuapp.com',
     
 ]
 
