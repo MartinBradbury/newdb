@@ -15,7 +15,7 @@ import os
 import dj_database_url
 
 if os.path.exists('env.py'):
-    import env
+    import env as env
 
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
