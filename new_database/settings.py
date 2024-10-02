@@ -59,9 +59,9 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS'), '127.0.0.1',]
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS'), 'http://localhost:3000', '127.0.0.1']
 
 # Application definition
 
@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
+    
 ]
 
 SITE_ID = 1
@@ -180,7 +181,7 @@ USE_TZ = True
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
