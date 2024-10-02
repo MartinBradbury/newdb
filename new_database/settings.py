@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
-        'rest_framework.authentication.SessionAuthentication'
+        'rest_framework.authentication.BasicAuthentication'
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
@@ -35,7 +35,6 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DATETIME_FORMAT': '%d %b %Y',
-    
 }
 if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
@@ -49,19 +48,15 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'new_database.serializers.CurrentUserSerializer'
+    'USER_DETAILS_SERIALIZER': 'new_database.serializer.CurrentUserSerializer'
 }
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS'), 'http://localhost:3000', '127.0.0.1']
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS'), 'http://localhost:3000', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -107,6 +102,22 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+if "CLIENT_ORIGIN" in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://127.0.0.1:3000",
+]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r'^https://.*\.codeinstitute-ide\.net$',
+    r'http://localhost:\d+$',
+    r'https://localhost:\d+$',
+    r'http://127\.0\.0\.\d+$',
+    r'https://127\.0\.0\.\d+$',
+]
+
 ROOT_URLCONF = 'new_database.urls'
 
 TEMPLATES = [
@@ -143,10 +154,14 @@ else:
          'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
      }
 
+
+
+
+
+
 if os.getenv('DJANGO_ENVIRONMENT') == 'production':
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 else:
-    # Development database remains unchanged
     pass
 
 # Password validation
@@ -181,12 +196,13 @@ USE_TZ = True
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://martinreact-a6aa313fd743.herokuapp.com',
-    
+    'https://localhost:3000',
+    'http://127.0.0.1:3000',
+    'https://127.0.0.1:3000',
 ]
 
 
